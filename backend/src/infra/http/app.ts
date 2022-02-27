@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import { router } from "./routes";
 import cors from "cors";
+import path from "path";
 import "dotenv/config";
 
 const app = express();
@@ -11,6 +12,8 @@ app.use(
     exposedHeaders: ["x-total-count", "Content-Type", "Content-Length"],
   })
 );
+
+app.use(express.static(path.join(__dirname, "..", "..", "..", "public")));
 
 app.use(router);
 
