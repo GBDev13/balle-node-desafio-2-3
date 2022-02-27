@@ -30,6 +30,7 @@ type AuthContextData = {
   deleteAccount: () => Promise<void>;
   sendForgotEmail: (email: string) => Promise<void>;
   resetPassword: (token: string, password: string) => Promise<void>;
+  updateAccount: (data: SignUpCredentials) => Promise<void>;
 };
 
 type AuthProviderProps = {
@@ -150,6 +151,26 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  async function updateAccount({ name, email, password }: SignUpCredentials) {
+    if(!user) return;
+    try {
+      setIsLoading(true);
+      await api.put(`/users/${user.id}`, {
+        name,
+        email,
+        password
+      });
+
+      signOut();
+      toast.success("Account updated successfully")
+    } catch (err: any) {
+      console.log(err)
+      toast.error(err.response.data.error)
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   async function sendForgotEmail(email: string) {
     try {
       setIsLoading(true);
@@ -189,7 +210,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         signUp,
         deleteAccount,
         sendForgotEmail,
-        resetPassword
+        resetPassword,
+        updateAccount
       }}>
       <LoadingContainer isLoading={isLoading}>
         <Spinner />

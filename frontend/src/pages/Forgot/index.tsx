@@ -38,7 +38,7 @@ export function Forgot() {
   const navigate = useNavigate();
 
   if(!isLoading && isAuthenticated) {
-    navigate("/")
+    navigate("/content")
     return <></>
   }
 

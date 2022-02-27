@@ -11,6 +11,7 @@ import { Content } from './pages/Content';
 import { SignUp } from './pages/SignUp';
 import { Forgot } from './pages/Forgot';
 import { NewForgot } from './pages/NewForgot';
+import { EditAccount } from './pages/EditAccount';
 
 ReactDOM.render(
 <React.StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.render(
           <Route path="/" element={<Login />}/>
           <Route path="/signup" element={<SignUp />}/>
           <Route path="/content" element={<Content />}/>
+          <Route path="/editAccount" element={<EditAccount />}/>
           <Route path="/newForgot" element={<NewForgot />}/>
           <Route path="/forgot" element={<Forgot />}/>
         </Routes>

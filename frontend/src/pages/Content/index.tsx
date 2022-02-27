@@ -19,6 +19,7 @@ export function Content() {
       <p>Email: {user?.email}</p>
       <footer>
         <button onClick={() => signOut()}>Sign Out</button>
+        <button onClick={() => navigate("/editAccount")}>Edit Account</button>
         <button onClick={() => deleteAccount()}>Delete this account</button>
       </footer>
     </Container>
