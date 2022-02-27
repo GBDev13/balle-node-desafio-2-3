@@ -20,7 +20,7 @@ model UserTokens {
   id           String   @id @default(uuid())
   token        String
   userId       String
-  user         User     @relation(fields: [userId], references: [id])
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   expires_date DateTime
   created_at   DateTime @default(now())
 }

@@ -30,7 +30,7 @@ export class UpdateUserUseCase {
     const nameOrError = Name.create(name);
     const emailOrError = Email.create(email);
     const passwordOrError = Password.create(password);
-    console.log(passwordOrError);
+
     if (nameOrError.isLeft()) {
       return left(nameOrError.value);
     }
