@@ -28,6 +28,8 @@ type AuthContextData = {
   setIsLoading: (load: boolean) => void;
   isLoading: boolean;
   deleteAccount: () => Promise<void>;
+  sendForgotEmail: (email: string) => Promise<void>;
+  resetPassword: (token: string, password: string) => Promise<void>;
 };
 
 type AuthProviderProps = {
@@ -61,26 +63,10 @@ const LoadingContainer = styled.div<LoadingProps>`
 
 export const AuthContext = createContext({} as AuthContextData);
 
-let authChannel: BroadcastChannel;
-
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>();
   const [isLoading, setIsLoading] = useState(true);
   const isAuthenticated = !!user;
-
-  useEffect(() => {
-    authChannel = new BroadcastChannel('auth');
-
-    authChannel.onmessage = (message) => {
-      switch (message.data) {
-        case 'signOut':
-          signOut();
-          break;
-        default:
-          break;
-      }
-    }
-  }, [])
 
   useEffect(() => {
     const token = localStorage.getItem("jadedragon.token");
@@ -103,8 +89,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   
   function signOut() {
     localStorage.removeItem("jadedragon.token");
-
-    authChannel.postMessage('signOut');
     setUser(undefined)
   }
 
@@ -166,6 +150,34 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  async function sendForgotEmail(email: string) {
+    try {
+      setIsLoading(true);
+      await api.post('/users/forgot', { email });
+
+      toast.success("Recovery email was sent successfully")
+    } catch (err: any) {
+      console.log(err)
+      toast.error(err.response.data.error)
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function resetPassword(token: string, password: string) {
+    try {
+      setIsLoading(true);
+      await api.patch(`/users/reset/${token}`, { password });
+
+      toast.success("Password changed successfully")
+    } catch (err: any) {
+      console.log(err)
+      toast.error(err.response.data.error)
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <AuthContext.Provider value={{
         signIn,
@@ -175,7 +187,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         isLoading,
         setIsLoading,
         signUp,
-        deleteAccount
+        deleteAccount,
+        sendForgotEmail,
+        resetPassword
       }}>
       <LoadingContainer isLoading={isLoading}>
         <Spinner />

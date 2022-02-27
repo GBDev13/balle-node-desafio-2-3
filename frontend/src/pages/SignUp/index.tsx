@@ -26,7 +26,7 @@ export function SignUp() {
       return
     }
 
-    signUp({ name, email, password })
+    await signUp({ name, email, password })
   }
 
   const navigate = useNavigate();

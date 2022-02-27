@@ -22,6 +22,27 @@ export const Container = styled.form`
 
   > section {
     width: 100%;
+
+    h2 {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    > span {
+      color: #fff;
+      font-size: 0.8rem;
+      text-align: right;
+      display: block;
+      opacity: 0.2;
+      margin-top: 1rem;
+      transition: 0.4s;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 `;
 

@@ -14,7 +14,7 @@ export function Forgot() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
-  const { isLoading, isAuthenticated, user, signOut, deleteAccount } = useAuth();
+  const { isLoading, isAuthenticated, resetPassword } = useAuth();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -23,11 +23,21 @@ export function Forgot() {
       toast.error("The password confirmation does not match");
       return
     }
+
+    if(!token) {
+      toast.error("Invalid token");
+      return;
+    }
+
+    await resetPassword(token, password);
+
+    setPassword("");
+    setPasswordConfirm("");
   }
 
   const navigate = useNavigate();
 
-  if(!isLoading && !isAuthenticated) {
+  if(!isLoading && isAuthenticated) {
     navigate("/")
     return <></>
   }

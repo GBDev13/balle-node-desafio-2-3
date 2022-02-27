@@ -10,6 +10,7 @@ import { Login } from './pages/Login';
 import { Content } from './pages/Content';
 import { SignUp } from './pages/SignUp';
 import { Forgot } from './pages/Forgot';
+import { NewForgot } from './pages/NewForgot';
 
 ReactDOM.render(
 <React.StrictMode>
@@ -21,6 +22,7 @@ ReactDOM.render(
           <Route path="/" element={<Login />}/>
           <Route path="/signup" element={<SignUp />}/>
           <Route path="/content" element={<Content />}/>
+          <Route path="/newForgot" element={<NewForgot />}/>
           <Route path="/forgot" element={<Forgot />}/>
         </Routes>
       <Toaster

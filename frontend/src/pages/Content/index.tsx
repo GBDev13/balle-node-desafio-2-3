@@ -18,8 +18,8 @@ export function Content() {
       <p>Name: {user?.name}</p>
       <p>Email: {user?.email}</p>
       <footer>
-        <button onClick={signOut}>Sign Out</button>
-        <button onClick={deleteAccount}>Delete this account</button>
+        <button onClick={() => signOut()}>Sign Out</button>
+        <button onClick={() => deleteAccount()}>Delete this account</button>
       </footer>
     </Container>
   )
