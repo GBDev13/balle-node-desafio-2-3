@@ -26,9 +26,7 @@ export class AuthenticateUserController implements Controller {
 
         return clientError(error);
       } else {
-        const { token } = result.value;
-
-        return ok({ token });
+        return ok(result.value);
       }
     } catch (err) {
       return fail(err);

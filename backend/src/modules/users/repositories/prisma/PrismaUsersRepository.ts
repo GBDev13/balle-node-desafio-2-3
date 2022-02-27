@@ -61,4 +61,15 @@ export class PrismaUsersRepository implements IUsersRepository {
       },
     });
   }
+
+  async updatePassById(userId: string, pass: string): Promise<void> {
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        password: pass,
+      },
+    });
+  }
 }

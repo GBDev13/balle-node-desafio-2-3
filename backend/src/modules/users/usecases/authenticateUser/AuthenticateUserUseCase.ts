@@ -6,6 +6,11 @@ import { InvalidEmailOrPasswordError } from "./errors/InvalidEmailOrPasswordErro
 
 type TokenResponse = {
   token: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+  };
 };
 
 type AuthenticateUserRequest = {
@@ -39,6 +44,9 @@ export class AuthenticateUserUseCase {
 
     const { token } = JWT.signUser(user);
 
-    return right({ token });
+    return right({
+      token,
+      user: { id: user.id, name: user.name.value, email: user.email.value },
+    });
   }
 }

@@ -8,6 +8,8 @@ import { makeGetAllUsersController } from "../factories/controllers/GetAllUsersC
 import { makeGetUserByIdController } from "../factories/controllers/GetUserByIdControllerFactory";
 import { makeUpdateUserController } from "../factories/controllers/UpdateUserControllerFactory";
 import { makeDeleteUserByIdController } from "../factories/controllers/DeleteUserByIdControllerFactory";
+import { makeSendForgotEmailController } from "../factories/controllers/SendForgotEmailControllerFactory";
+import { makeResetUserPasswordController } from "../factories/controllers/ResetUserPasswordControllerFactory";
 
 const userRoutes = Router();
 
@@ -16,6 +18,12 @@ userRoutes.get(
   "/:id",
   adaptMiddleware(makeEnsureAuthenticatedMiddleware()),
   adaptRoute(makeGetUserByIdController())
+);
+
+userRoutes.post("/forgot", adaptRoute(makeSendForgotEmailController()));
+userRoutes.patch(
+  "/reset/:token",
+  adaptRoute(makeResetUserPasswordController())
 );
 
 userRoutes.post("/", adaptRoute(makeCreateUserController()));

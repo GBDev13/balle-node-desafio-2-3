@@ -8,4 +8,5 @@ export interface IUsersRepository {
   deleteById(id: string): Promise<void>;
   findAll(): Promise<UserPrisma[]>;
   updateById(userId: string, user: User): Promise<void>;
+  updatePassById(userId: string, pass: string): Promise<void>;
 }

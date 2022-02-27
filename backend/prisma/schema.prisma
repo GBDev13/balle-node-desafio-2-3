@@ -8,9 +8,19 @@ datasource db {
 }
 
 model User {
-  id         String   @id
-  email      String   @unique
+  id         String       @id
+  email      String       @unique
   name       String
   password   String
-  created_at DateTime @default(now())
+  created_at DateTime     @default(now())
+  userTokens UserTokens[]
+}
+
+model UserTokens {
+  id           String   @id @default(uuid())
+  token        String
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  expires_date DateTime
+  created_at   DateTime @default(now())
 }
