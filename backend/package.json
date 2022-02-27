@@ -15,7 +15,7 @@
     "typescript": "^4.5.5"
   },
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register --transpile-only --ignore-watch node_modules --respawn --exit-child src/infra/http/server.ts",
+    "start": "ts-node -r tsconfig-paths/register --transpile-only src/infra/http/server.ts",
     "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules --respawn --exit-child src/infra/http/server.ts"
   },
   "dependencies": {
