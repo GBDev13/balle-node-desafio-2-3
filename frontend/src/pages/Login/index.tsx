@@ -47,7 +47,7 @@ export function Login() {
               value={password}
               onChangeFc={setPassword}
             />
-            <span onClick={() => navigate("/newForgot")}>Forgot you password?</span>
+            <span onClick={() => navigate("/newForgot")}>Forgot your password?</span>
           </>
         }
         buttons={
