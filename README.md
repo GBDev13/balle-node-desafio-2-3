@@ -25,7 +25,7 @@
 
 &nbsp;
 
-## 🛠️ Tecnologias/Ferramentas ultilizadas
+## 🛠️ Tecnologias/Ferramentas utilizadas
 
 * [Vite](https://vitejs.dev/)
 * [TypeScript](https://www.typescriptlang.org/)
